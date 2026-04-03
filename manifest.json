@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "eBay Sales Insights & Downloader",
+  "version": "1",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*.ebay.com/*",
+    "*://*.ebay.co.uk/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.ebay.com/*",
+        "*://*.ebay.co.uk/*"
+      ],
+      "js": [
+        "content/jszip.min.js",
+        "content/state.js",
+        "content/helpers.js",
+        "content/button.js",
+        "content/zip.js",
+        "content/saleHistoryButton.js",
+        "content/downloadImagesButton.js",
+        "content/observer.js",
+        "content/purchaseHistoryAnalyzer/dateParser.js",
+        "content/purchaseHistoryAnalyzer/lineChart.js",
+        "content/purchaseHistoryAnalyzer/barChart.js",
+        "content/purchaseHistoryAnalyzer/variantsCard.js",
+        "content/purchaseHistoryAnalyzer.js",
+        "content.js"
+      ]
+    }
+  ]
+}
