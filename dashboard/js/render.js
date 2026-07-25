@@ -25,7 +25,6 @@ function processDashboardRender(targetDateStr, ebaySiteDomain) {
   const urlParams = new URLSearchParams(window.location.search);
   const forceEmpty = urlParams.get('mode') === 'empty';
 
-  // Dynamically update empty state redirect link domain
   if (dom.ebayOrdersLink) {
     dom.ebayOrdersLink.href = `https://www.${ebaySiteDomain}/sh/ord`;
   }
@@ -145,8 +144,6 @@ function renderDailySalesView(allSessionOrders, targetDateStr, ebaySiteDomain) {
   }
   state.activeOrdersList = orders;
 
-  // Sorting logic for UI headers removed due to Grid Layout.
-
   if (orders.length === 0) {
     dom.dailyGridContainer.style.display = 'none';
     dom.emptyState.style.display = 'flex';
@@ -215,7 +212,6 @@ function renderDailySalesView(allSessionOrders, targetDateStr, ebaySiteDomain) {
 
   const paginatedOrders = sortedOrders.slice(startIndex, endIndex);
 
-  // Update Pagination UI
   if (dom.dailyPageIndicator) {
     dom.dailyPageIndicator.textContent = `Page ${state.dailyPage} of ${totalPages}`;
   }
@@ -328,8 +324,7 @@ function renderMultiDayPanel(allSessionOrders, ebaySiteDomain) {
     return true;
   });
 
-  // Update Meta Cards
-  updateAnalyzerMetaCards(analyzedProducts, dom);
+   updateAnalyzerMetaCards(analyzedProducts, dom);
 
   // Render the BI Dashboard Data Grid
   renderAnalyzerDashboard(analyzedProducts, ebaySiteDomain);

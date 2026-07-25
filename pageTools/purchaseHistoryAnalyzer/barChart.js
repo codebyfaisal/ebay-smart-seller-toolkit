@@ -60,22 +60,17 @@ function drawSalesRevenueBarChart(container, chartData, svgWidth, svgHeight, pad
         .chart-bar, .bar-guide, .bar-label, .bar-tooltip {
           transition: all 0.15s ease-in-out;
         }
-      </style>
-      
-      <!-- Grid lines -->
+      </style>      
       <line x1="${paddingX}" y1="${getY_revenue(0)}" x2="${svgWidth - paddingX}" y2="${getY_revenue(0)}" stroke="#f3f4f6" stroke-width="1.5" />
       <line x1="${paddingX}" y1="${getY_revenue(maxRevenue / 2)}" x2="${svgWidth - paddingX}" y2="${getY_revenue(maxRevenue / 2)}" stroke="#f3f4f6" stroke-width="1" stroke-dasharray="4,4" />
-      <line x1="${paddingX}" y1="${getY_revenue(maxRevenue)}" x2="${svgWidth - paddingX}" y2="${getY_revenue(maxRevenue)}" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4" />
-      
-      <!-- Bars & Labels & Guide Lines -->
-  `;
+      <line x1="${paddingX}" y1="${getY_revenue(maxRevenue)}" x2="${svgWidth - paddingX}" y2="${getY_revenue(maxRevenue)}" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4" />`;
 
   points_revenue.forEach((p, i) => {
     const rev = chartData[i].revenue;
     const dateLabel = chartData[i].label;
     const barHeight = (svgHeight - paddingY) - p.y;
     const radius = Math.min(barWidth / 2, 4);
-    
+
     barSvg += `
       <g class="bar-group">
         <!-- Interactive vertical guide line -->
@@ -111,13 +106,9 @@ function drawSalesRevenueBarChart(container, chartData, svgWidth, svgHeight, pad
       barSvg += `<text x="${points_revenue[points_revenue.length - 1].x}" y="${svgHeight - 10}" text-anchor="end" font-size="9" font-weight="600" fill="#9ca3af">${chartData[chartData.length - 1].label}</text>`;
     }
   }
-
-  // Y-Axis Labels
-  barSvg += `
-    <text x="${paddingX - 8}" y="${getY_revenue(0) + 3}" text-anchor="end" font-size="9" font-weight="600" fill="#9ca3af">£0</text>
+  barSvg += `<text x="${paddingX - 8}" y="${getY_revenue(0) + 3}" text-anchor="end" font-size="9" font-weight="600" fill="#9ca3af">£0</text>
     <text x="${paddingX - 8}" y="${getY_revenue(maxRevenue / 2) + 3}" text-anchor="end" font-size="9" font-weight="600" fill="#9ca3af">${formatGBP(maxRevenue / 2)}</text>
-    <text x="${paddingX - 8}" y="${getY_revenue(maxRevenue) + 3}" text-anchor="end" font-size="9" font-weight="600" fill="#9ca3af">${formatGBP(maxRevenue)}</text>
-  `;
+    <text x="${paddingX - 8}" y="${getY_revenue(maxRevenue) + 3}" text-anchor="end" font-size="9" font-weight="600" fill="#9ca3af">${formatGBP(maxRevenue)}</text>`;
 
   barSvg += `</svg>`;
   container.innerHTML += barSvg;

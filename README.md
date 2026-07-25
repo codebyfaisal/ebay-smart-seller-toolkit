@@ -30,4 +30,6 @@ A powerful, easy-to-use Chrome Extension designed to simplify your eBay selling 
 This tool is provided as-is, but new updates, bug fixes, and improvements will be released from time to time to maintain compatibility with eBay. 
 
 ---
+*Note: This extension was built with the assistance of AI, but its code has been thoroughly reviewed and manually tested by the developer.*
+
 *Disclaimer: This extension is a third-party tool and is not officially affiliated with, endorsed by, or sponsored by eBay Inc.*

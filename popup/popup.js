@@ -55,8 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-  // Date input removed
-
     openActiveDashboardBtn.addEventListener('click', () => {
       if (isExtension) {
         chrome.tabs.create({
@@ -116,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Set Connection Status Dot Helper
   function setStatus(text, type) {
     statusText.textContent = text;
     statusBadge.className = 'status-badge';
@@ -236,10 +233,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const existingIdx = mergedOrders.findIndex(eo => eo.orderId === mo.orderId);
         if (existingIdx !== -1) {
-          mergedOrders[existingIdx] = mo; // OVERWRITE / UPDATE
+          mergedOrders[existingIdx] = mo;
           updatedCount++;
         } else {
-          mergedOrders.push(mo); // APPEND NEW
+          mergedOrders.push(mo);
           addedCount++;
         }
       });
@@ -307,7 +304,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const orderTotalText = totalOrderPriceEl ? totalOrderPriceEl.textContent.trim() : '£0.00';
 
           itemElements.forEach((itemEl, idx) => {
-
 
             const orderNumber = `${baseOrderNumber}---item${idx + 1}`;
             
@@ -394,8 +390,6 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         } else {
           // Single item order (standard flow)
-          
-
 
           const orderNumber = baseOrderNumber;
 

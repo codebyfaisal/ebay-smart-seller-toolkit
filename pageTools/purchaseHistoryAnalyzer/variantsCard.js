@@ -10,7 +10,6 @@ function createVariantsCard(container, salesData, allVariationKeys) {
     box-sizing: border-box;
   `;
 
-  // Header with dropdown selection
   const varHeader = document.createElement("div");
   varHeader.style.cssText = `
     display: flex;
@@ -96,12 +95,10 @@ function createVariantsCard(container, salesData, allVariationKeys) {
     });
   }
 
-  // Listen to select changes
   groupSelect.addEventListener("change", (e) => {
     updateVariantsList(e.target.value);
   });
 
-  // Initial draw
   updateVariantsList("Default");
 
   container.appendChild(varCol);

@@ -106,7 +106,6 @@ function runPurchaseHistoryAnalyzer() {
     current.setDate(current.getDate() + 1);
   }
 
-  // Create Dashboard Container
   const dashboard = document.createElement("div");
   dashboard.className = "ebay-smart-seller-toolkit-history-dashboard";
   dashboard.style.cssText = `
@@ -127,7 +126,6 @@ function runPurchaseHistoryAnalyzer() {
     transform: translateX(100%);
   `;
 
-  // Create Close Button
   const closeBtn = document.createElement("div");
   closeBtn.style.cssText = `
     cursor: pointer;
@@ -145,7 +143,6 @@ function runPurchaseHistoryAnalyzer() {
   closeBtn.onmouseenter = () => closeBtn.style.color = "#1f2937";
   closeBtn.onmouseleave = () => closeBtn.style.color = "#9ca3af";
 
-  // Create Open Trigger Floating Button
   const toggleBtn = document.createElement("div");
   toggleBtn.className = "ebay-smart-seller-toolkit-sidebar-toggle";
   toggleBtn.style.cssText = `
@@ -180,7 +177,6 @@ function runPurchaseHistoryAnalyzer() {
     toggleBtn.style.transform = "scale(1)";
   };
 
-  // Toggle Action
   let isOpen = false;
   function toggleSidebar() {
     isOpen = !isOpen;
@@ -198,7 +194,6 @@ function runPurchaseHistoryAnalyzer() {
   closeBtn.onclick = toggleSidebar;
   toggleBtn.onclick = toggleSidebar;
 
-  // Title section
   const titleSection = document.createElement("div");
   titleSection.style.cssText = `
     display: flex;

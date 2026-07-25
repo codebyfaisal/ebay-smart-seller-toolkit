@@ -88,13 +88,11 @@ function injectItemPage() {
 
   lastItemId = itemId;
 
-  // Determine which buttons to show based on user settings
   const showSold = !window.ebayToolsSettings || window.ebayToolsSettings.enableSoldHistoryListing !== false;
   const showImg = !window.ebayToolsSettings || window.ebayToolsSettings.enableImgDownload !== false;
 
   if (!showSold && !showImg) return;
 
-  // Create a flex-row container for all eBay Tools buttons
   const container = document.createElement("div");
   container.classList.add("ebay-smart-seller-toolkit");
   container.style.display = "flex";

@@ -77,18 +77,13 @@ function drawSalesVelocityLineChart(container, chartData, svgWidth, svgHeight, p
         }
       </style>
       
-      <!-- Grid lines -->
       <line x1="${paddingX}" y1="${getY_line(0)}" x2="${svgWidth - paddingX}" y2="${getY_line(0)}" stroke="#f3f4f6" stroke-width="1.5" />
       <line x1="${paddingX}" y1="${getY_line(maxQty / 2)}" x2="${svgWidth - paddingX}" y2="${getY_line(maxQty / 2)}" stroke="#f3f4f6" stroke-width="1" stroke-dasharray="4,4" />
       <line x1="${paddingX}" y1="${getY_line(maxQty)}" x2="${svgWidth - paddingX}" y2="${getY_line(maxQty)}" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4" />
       
-      <!-- Area fill under line -->
       ${areaPath ? `<path d="${areaPath}" fill="url(#chartGrad)" />` : ""}
       
-      <!-- Path line -->
       ${linePath ? `<path d="${linePath}" fill="none" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)" />` : ""}
-      
-      <!-- Nodes & Labels & Guide Lines -->
   `;
 
   points_line.forEach((p, i) => {

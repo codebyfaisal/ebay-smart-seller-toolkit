@@ -129,8 +129,6 @@ function dashboardInit() {
     render.loadAndRenderDashboard(state.activeTargetDateStr);
   });
 
-  // Sort Click Triggers removed due to Grid Layout
-
   // Modal listeners
   dom.fabViewJsonBtn.addEventListener('click', () => {
     if (dom.fabViewJsonBtn.disabled) return;
