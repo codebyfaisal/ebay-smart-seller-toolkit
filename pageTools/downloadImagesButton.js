@@ -79,7 +79,7 @@ function injectItemPage() {
   const itemId = extractItemId(location.href);
   if (!itemId) return;
 
-  const existingContainer = document.querySelector(".ebay-tools-extension");
+  const existingContainer = document.querySelector(".ebay-smart-seller-toolkit");
   if (existingContainer && lastItemId === itemId) return;
 
   if (existingContainer) {
@@ -89,37 +89,30 @@ function injectItemPage() {
   lastItemId = itemId;
 
   // Determine which buttons to show based on user settings
-  const showSold = !window.ebayToolsSettings || window.ebayToolsSettings.enableSoldHistory !== false;
+  const showSold = !window.ebayToolsSettings || window.ebayToolsSettings.enableSoldHistoryListing !== false;
   const showImg = !window.ebayToolsSettings || window.ebayToolsSettings.enableImgDownload !== false;
 
   if (!showSold && !showImg) return;
 
   // Create a flex-row container for all eBay Tools buttons
   const container = document.createElement("div");
-  container.classList.add("ebay-tools-extension");
+  container.classList.add("ebay-smart-seller-toolkit");
   container.style.display = "flex";
   container.style.flexDirection = "row";
   container.style.gap = "8px";
   container.style.marginTop = "8px";
 
   if (showSold) {
-    const soldBtn = createBtn("📊 Sold history", () => {
-      window.open(
-        `https://www.ebay.co.uk/bin/purchaseHistory?item=${itemId}`,
-        "_blank"
-      );
-    });
-    soldBtn.style.marginTop = "0px";
+    const soldBtn = createLinkBtn(`<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="15 7 21 7 21 13"></polyline></svg> Sold history`, getSoldHistoryUrl(itemId));
     container.appendChild(soldBtn);
   }
 
   if (showImg) {
-    const imgBtn = createBtn("📥 Download Images", async () => {
+    const imgBtn = createBtn(`<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Download Images`, async () => {
       const titleText = title.innerText || "ebay_listing_images";
       const sanitizedTitle = titleText.replace(/[\/\\:*?"<>|\n\r\t]/g, "").trim();
       await downloadImages(sanitizedTitle);
     });
-    imgBtn.style.marginTop = "0px";
     container.appendChild(imgBtn);
   }
 

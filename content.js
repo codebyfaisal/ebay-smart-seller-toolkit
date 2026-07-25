@@ -25,13 +25,8 @@ function run() {
   }
 }
 
-// Load configurations from storage before running
-chrome.storage.local.get({
-  enableImgDownload: true,
-  enableSoldHistory: true,
-  enableActiveListingsIcon: true,
-  enableAnalyticsSidebar: true
-}, (settings) => {
+// Load configurations from centralized storage module before running
+window.getSettings((settings) => {
   window.ebayToolsSettings = settings;
   run();
 });

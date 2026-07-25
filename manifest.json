@@ -1,53 +1,84 @@
 {
   "manifest_version": 3,
-  "name": "eBay Sales Insights & Downloader",
-  "version": "1",
+  "name": "eBay Smart Seller Toolkit",
+  "version": "2.0.0",
+  "description": "Analyzes the eBay Seller Hub All Orders page, counting daily orders and aggregating sales data, alongside comprehensive tools and insights.",
   "permissions": [
-    "contextMenus",
+    "activeTab",
     "tabs",
-    "storage"
+    "scripting",
+    "storage",
+    "downloads",
+    "contextMenus"
   ],
+  "options_page": "options/index.html",
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
   "host_permissions": [
     "*://*.ebay.com/*",
-    "*://*.ebay.co.uk/*"
+    "*://*.ebay.co.uk/*",
+    "*://*.ebay.com.au/*",
+    "*://*.ebay.ca/*",
+    "*://*.ebay.de/*",
+    "*://*.ebay.fr/*",
+    "*://*.ebay.it/*",
+    "*://*.ebay.es/*"
   ],
-  "background": {
-    "service_worker": "background.js"
-  },
   "icons": {
     "16": "icon.png",
     "48": "icon.png",
     "128": "icon.png"
   },
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "popup/index.html",
     "default_icon": {
       "16": "icon.png",
-      "32": "icon.png",
       "48": "icon.png",
       "128": "icon.png"
     }
+  },
+  "background": {
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
       "matches": [
         "*://*.ebay.com/*",
-        "*://*.ebay.co.uk/*"
+        "*://*.ebay.co.uk/*",
+        "*://*.ebay.com.au/*",
+        "*://*.ebay.ca/*",
+        "*://*.ebay.de/*",
+        "*://*.ebay.fr/*",
+        "*://*.ebay.it/*",
+        "*://*.ebay.es/*"
+      ],
+      "css": [
+        "pageTools/styles.css"
       ],
       "js": [
-        "content/jszip.min.js",
-        "content/state.js",
-        "content/helpers.js",
-        "content/button.js",
-        "content/zip.js",
-        "content/saleHistoryButton.js",
-        "content/downloadImagesButton.js",
-        "content/observer.js",
-        "content/purchaseHistoryAnalyzer/dateParser.js",
-        "content/purchaseHistoryAnalyzer/lineChart.js",
-        "content/purchaseHistoryAnalyzer/barChart.js",
-        "content/purchaseHistoryAnalyzer/variantsCard.js",
-        "content/purchaseHistoryAnalyzer.js",
+        "utils/dom.js",
+        "utils/ebay.js",
+        "shared/ebayUrl.js",
+        "shared/itemExtractor.js",
+        "shared/buttonFactory.js",
+        "shared/storage.js",
+        "shared/selectors.js",
+        "pageTools/jszip.min.js",
+        "pageTools/pageState.js",
+        "pageTools/soldHistory/searchButton.js",
+        "pageTools/soldHistory/storeButton.js",
+        "pageTools/soldHistory/carouselButton.js",
+        "pageTools/soldHistory/activeListingButton.js",
+        "pageTools/zip.js",
+        "pageTools/downloadImagesButton.js",
+        "pageTools/observer.js",
+        "pageTools/purchaseHistoryAnalyzer/dateParser.js",
+        "pageTools/purchaseHistoryAnalyzer/lineChart.js",
+        "pageTools/purchaseHistoryAnalyzer/barChart.js",
+        "pageTools/purchaseHistoryAnalyzer/variantsCard.js",
+        "pageTools/purchaseHistoryAnalyzer.js",
         "content.js"
       ]
     }

@@ -23,7 +23,7 @@ function createVariantsCard(container, salesData, allVariationKeys) {
   `;
 
   const groupSelect = document.createElement("select");
-  groupSelect.id = "ebay-tools-variant-dropdown";
+  groupSelect.id = "ebay-smart-seller-toolkit-variant-dropdown";
   groupSelect.style.cssText = `
     font-size: 11px;
     font-weight: 600;
@@ -56,7 +56,7 @@ function createVariantsCard(container, salesData, allVariationKeys) {
   varCol.appendChild(varHeader);
 
   const listContainer = document.createElement("div");
-  listContainer.id = "ebay-tools-variants-list";
+  listContainer.id = "ebay-smart-seller-toolkit-variants-list";
   varCol.appendChild(listContainer);
 
   // Dynamic variants rendering function

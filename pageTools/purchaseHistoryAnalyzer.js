@@ -2,7 +2,7 @@ function runPurchaseHistoryAnalyzer() {
   if (window.ebayToolsSettings && window.ebayToolsSettings.enableAnalyticsSidebar === false) return;
 
   // Prevent duplicate insertion
-  if (document.querySelector(".ebay-tools-history-dashboard")) return;
+  if (document.querySelector(".ebay-smart-seller-toolkit-history-dashboard")) return;
 
   const table = document.querySelector(".contentTable") || document.querySelector("table");
   if (!table) return;
@@ -108,7 +108,7 @@ function runPurchaseHistoryAnalyzer() {
 
   // Create Dashboard Container
   const dashboard = document.createElement("div");
-  dashboard.className = "ebay-tools-history-dashboard";
+  dashboard.className = "ebay-smart-seller-toolkit-history-dashboard";
   dashboard.style.cssText = `
     position: fixed;
     top: 0;
@@ -147,7 +147,7 @@ function runPurchaseHistoryAnalyzer() {
 
   // Create Open Trigger Floating Button
   const toggleBtn = document.createElement("div");
-  toggleBtn.className = "ebay-tools-sidebar-toggle";
+  toggleBtn.className = "ebay-smart-seller-toolkit-sidebar-toggle";
   toggleBtn.style.cssText = `
     position: fixed;
     top: 20px;

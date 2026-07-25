@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eBay Orders Analyzer - Settings</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #121212;
+      --bg-card: #1a1a1a;
+      --bg-card-hover: #242424;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-focus: rgba(255, 255, 255, 0.3);
+      --primary-grad: linear-gradient(135deg, #444444 0%, #222222 100%);
+      --accent-grad: linear-gradient(135deg, #555555 0%, #333333 100%);
+      --danger-grad: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+      --text-main: #ffffff;
+      --text-muted: #a3a3a3;
+      --text-accent: #e5e5e5;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+      --transition-fast: 0.2s ease;
+    }
+
+    [data-theme="light"] {
+      --bg-dark: #f5f5f5;
+      --bg-card: #ffffff;
+      --bg-card-hover: #ebebeb;
+      --border-color: rgba(0, 0, 0, 0.1);
+      --border-focus: rgba(0, 0, 0, 0.3);
+      --text-main: #000000;
+      --text-muted: #555555;
+      --text-accent: #222222;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .settings-container {
+      width: 480px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .settings-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+    }
+
+    .logo-container {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-grad);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-container svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .title-area h2 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .title-area p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 12px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 13px;
+      transition: var(--transition-fast);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .form-description {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      flex-direction: row;
+    }
+
+    .checkbox-group input {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .checkbox-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+      text-transform: none;
+      letter-spacing: normal;
+      cursor: pointer;
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      color: #fff;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--primary-grad);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .status-alert {
+      font-size: 12px;
+      font-weight: 500;
+      color: #10b981;
+      display: none;
+      transition: var(--transition-fast);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="settings-container">
+    <div class="settings-header">
+      <div class="logo-container">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+        </svg>
+      </div>
+      <div class="title-area">
+        <h2>Extension Settings</h2>
+        <p>Configure local database files and scanning preferences</p>
+      </div>
+    </div>
+
+    <div class="form-group"
+      style="border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 5px;">
+      <label style="color: var(--text-main); font-size: 14px; margin-bottom: 12px; display: block;">Tabs</label>
+      <div class="checkbox-group" style="grid-column: 1 / -1;">
+        <input type="checkbox" id="enableSellerScraper">
+        <label for="enableSellerScraper" class="checkbox-label"
+          style="text-transform: none; color: var(--text-muted); font-weight: normal; font-size: 13px;">Sales Data Scraper</label>
+      </div>
+    </div>
+
+    <!-- Master Toggles -->
+    <div class="form-group"
+      style="border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 5px;">
+      <label style="color: var(--text-main); font-size: 14px; margin-bottom: 12px; display: block;">Page Tools</label>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="checkbox-group">
+          <input type="checkbox" id="enableImgDownload">
+          <label for="enableImgDownload" class="checkbox-label"
+            style="text-transform: none; color: var(--text-muted); font-weight: normal; font-size: 13px;">Image
+            Downloader</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="enableSoldHistorySearch">
+          <label for="enableSoldHistorySearch" class="checkbox-label"
+            style="text-transform: none; color: var(--text-muted); font-weight: normal; font-size: 13px;">Sold History
+            (Search Page)</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="enableSoldHistoryListing">
+          <label for="enableSoldHistoryListing" class="checkbox-label"
+            style="text-transform: none; color: var(--text-muted); font-weight: normal; font-size: 13px;">Sold History
+            (Listing Page)</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="enableSoldHistoryCarousel">
+          <label for="enableSoldHistoryCarousel" class="checkbox-label"
+            style="text-transform: none; color: var(--text-muted); font-weight: normal; font-size: 13px;">Sold History
+            (Carousels)</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="enableSoldHistoryStore">
+          <label for="enableSoldHistoryStore" class="checkbox-label"
+            style="text-transform: none; color: var(--text-muted); font-weight: normal; font-size: 13px;">Sold History
+            (Shop Pages)</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="enableActiveListingsIcon">
+          <label for="enableActiveListingsIcon" class="checkbox-label"
+            style="text-transform: none; color: var(--text-muted); font-weight: normal; font-size: 13px;">Soldhistory
+            (Active listings Page)</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="enableAnalyticsSidebar">
+          <label for="enableAnalyticsSidebar" class="checkbox-label"
+            style="text-transform: none; color: var(--text-muted); font-weight: normal; font-size: 13px;">Analytics
+            Sidebar</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Storage settings -->
+    <div class="form-group">
+      <label for="downloadSubpath">Download Subpath Folder</label>
+      <input type="text" id="downloadSubpath" class="form-control" placeholder="ebay_orders">
+      <span class="form-description">
+        Relative directory inside your Chrome Downloads folder (e.g. <code>ebay_orders</code> or
+        <code>ebay_orders/database</code>). Left blank saves directly to Downloads.
+      </span>
+    </div>
+
+    <!-- Scraper settings -->
+    <div class="form-group">
+      <label for="defaultCurrency">Default Currency Symbol</label>
+      <select id="defaultCurrency" class="form-control">
+        <option value="£">£ (GBP)</option>
+        <option value="$">$ (USD)</option>
+        <option value="€">€ (EUR)</option>
+        <option value="¥">¥ (JPY)</option>
+      </select>
+    </div>
+
+    <!-- Regional domain settings -->
+    <div class="form-group">
+      <label for="ebaySite">eBay Regional Site Domain</label>
+      <select id="ebaySite" class="form-control">
+        <option value="ebay.co.uk">ebay.co.uk (United Kingdom)</option>
+        <option value="ebay.com">ebay.com (United States)</option>
+        <option value="ebay.com.au">ebay.com.au (Australia)</option>
+        <option value="ebay.ca">ebay.ca (Canada)</option>
+        <option value="ebay.de">ebay.de (Germany)</option>
+        <option value="ebay.fr">ebay.fr (France)</option>
+        <option value="ebay.it">ebay.it (Italy)</option>
+        <option value="ebay.es">ebay.es (Spain)</option>
+      </select>
+      <span class="form-description">
+        Sets the domain used for generating links to eBay listings and Sell/Order dashboards, matching your preferred
+        local site version.
+      </span>
+    </div>
+
+    <!-- UI Preferences -->
+    <div class="form-group checkbox-group">
+      <input type="checkbox" id="autoOpenDashboard">
+      <label for="autoOpenDashboard" class="checkbox-label">Auto-open dashboard in new tab after scanning</label>
+    </div>
+
+    <!-- Footer buttons -->
+    <div class="form-footer">
+      <span id="statusAlert" class="status-alert">Settings saved successfully!</span>
+      <button id="closeBtn" class="btn btn-secondary">Close</button>
+      <button id="saveBtn" class="btn btn-primary">Save Settings</button>
+    </div>
+  </div>
+
+  <script src="../shared/theme.js"></script>
+  <script src="options.js"></script>
+</body>
+
+</html>

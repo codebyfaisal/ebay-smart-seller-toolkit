@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eBay Orders Analyzer</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
+        </svg>
+      </div>
+      <span class="brand-title">Smart Seller Toolkit</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div id="statusBadge" class="status-badge">
+        <span class="status-dot"></span>
+        <span id="statusText">Checking tab...</span>
+      </div>
+      <!-- Theme Toggle Button -->
+      <button id="themeToggleBtnPopup" class="theme-toggle" title="Toggle Theme">
+        <svg id="themeIconPopup" viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs" style="display: flex; border-bottom: 1px solid var(--border-color);">
+    <button id="tabToolsBtn" style="flex: 1; padding: 12px; background: none; border: none; color: var(--text-main); font-weight: 600; cursor: pointer; border-bottom: 2px solid #3b82f6; transition: 0.2s;">Page Tools</button>
+    <button id="tabScraperBtn" style="flex: 1; padding: 12px; background: none; border: none; color: var(--text-muted); font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; transition: 0.2s;">Sales Data Scraper</button>
+  </div>
+
+  <!-- Tab 1: Scraper -->
+  <div id="scraperView" style="display: none;">
+  <!-- Main Content -->
+  <main>
+
+    <!-- Action / Scan Card -->
+    <div class="cta-container">
+      <div class="flex" style="display: flex; justify-content: space-between; gap: 8px;">
+        <button id="analyzeBtn" class="primary-btn" style="flex: 1;" disabled>
+          <svg viewBox="0 0 24 24" style="width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:2.5;">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+          </svg>
+          <span>Scan Current Page</span>
+        </button>
+        <button id="clearBtn" class="danger-btn" style="width: 42px; padding: 0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" title="Clear current scraped session database">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5;">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button id="openActiveDashboardBtn" class="secondary-btn" style="flex: 1; padding: 10px 2px; font-size: 13px;"
+          title="Open Dashboard">
+          Dashboard
+        </button>
+      </div>
+    </div>
+
+    <!-- Single Metric -->
+    <div style="text-align: center; margin-bottom: 12px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+      <div style="font-size: 28px; font-weight: bold; color: var(--text-accent);" id="totalSalesMetric">0</div>
+      <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;">Total Scraped Sales</div>
+    </div>
+
+    <!-- Progress indicator text -->
+    <div id="progressLog" class="progress-log">Click scan to start capturing page data.</div>
+  </main>
+
+  </div> <!-- End scraperView -->
+
+  <!-- Tab 2: Page Tools -->
+  <div id="toolsView" style="display: block; padding-bottom: 12px;">
+    <iframe src="../settings/index.html" style="width: 100%; height: 350px; border: none; overflow: hidden;"></iframe>
+  </div>
+
+  <!-- Unified Footer -->
+  <footer>
+    <span>v2.0.0</span>
+    <a href="#" id="settingsLink" class="footer-link">Options</a>
+    <span id="lastScannedText">Not scanned recently</span>
+  </footer>
+
+  <script src="../utils/dom.js"></script>
+  <script src="../utils/ebay.js"></script>
+  <script src="../shared/theme.js"></script>
+  <script src="popup.js"></script>
+</body>
+
+</html>
+
+
+
