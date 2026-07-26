@@ -1,4 +1,4 @@
-import { state } from './state.js';
+import { state } from './dashboardState.js';
 import * as dom from './dom.js';
 
 export function handleSingleFileImport(e, onSuccess) {

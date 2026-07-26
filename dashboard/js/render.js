@@ -190,12 +190,27 @@ function renderDailySalesView(allSessionOrders, targetDateStr, ebaySiteDomain) {
         valA = parseFloat((a.priceText || '0').replace(/[^\d.]/g, '')) || 0;
         valB = parseFloat((b.priceText || '0').replace(/[^\d.]/g, '')) || 0;
       } else if (state.currentSortCol === 'date') {
+        const tsA = a.timestamp || 0;
+        const tsB = b.timestamp || 0;
+        if (tsA !== tsB) return state.currentSortDir === 'asc' ? tsA - tsB : tsB - tsA;
         valA = parseTimeToMinutes(a.timeStr);
         valB = parseTimeToMinutes(b.timeStr);
       }
 
       if (valA === valB) return 0;
       return state.currentSortDir === 'asc' ? valA - valB : valB - valA;
+    });
+  } else {
+    // Default Sort: Newest First (By Date Timestamp, then by Time of Day)
+    sortedOrders.sort((a, b) => {
+      const tsA = a.timestamp || 0;
+      const tsB = b.timestamp || 0;
+      if (tsA !== tsB) {
+        return tsB - tsA; // Descending dates (newest first)
+      }
+      const timeA = parseTimeToMinutes(a.timeStr);
+      const timeB = parseTimeToMinutes(b.timeStr);
+      return timeB - timeA; // Descending times (newest first)
     });
   }
 

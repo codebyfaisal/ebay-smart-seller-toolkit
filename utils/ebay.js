@@ -23,7 +23,10 @@ window.parseEbayDateToTimestamp = function(ebayDateStr) {
   const monthStr = parts[1];
   let year = todayDate.getFullYear();
   if (parts.length > 2) {
-    year = parseInt(parts[2], 10) || year;
+    const parsedYear = parseInt(parts[2], 10);
+    if (!isNaN(parsedYear) && parsedYear > 2000) {
+      year = parsedYear;
+    }
   }
 
   const months = {

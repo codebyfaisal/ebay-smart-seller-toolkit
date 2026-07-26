@@ -1,4 +1,4 @@
-import { state } from './state.js';
+import { state } from './dashboardState.js';
 
 export function analyzeProducts(allSessionOrders, evaluationDateStr, streakThreshold = 5, groupingMode = 'sku', allowedDates = null) {
   const dates = Object.keys(allSessionOrders);

@@ -58,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
     openActiveDashboardBtn.addEventListener('click', () => {
       if (isExtension) {
         chrome.tabs.create({
-          url: chrome.runtime.getURL(`dashboard/dashboard.html`)
+          url: chrome.runtime.getURL(`dashboard/index.html`)
         });
       } else {
-        alert(`Opening simulation: dashboard/dashboard.html\n(In browser, open dashboard.html manually)`);
+        alert(`Opening simulation: dashboard/index.html\n(In browser, open index.html manually)`);
       }
     });
 
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isExtension) {
         chrome.runtime.openOptionsPage();
       } else {
-        alert('Opening settings: options.html\n(In browser, open options.html manually)');
+        alert('Opening settings: index.html\n(In browser, open index.html manually)');
       }
     });
   }
@@ -282,45 +282,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (itemElements.length > 1) {
           // Multi-item order: split into separate items
-          let qtyEls = Array.from(row.querySelectorAll('.quantity strong') || []);
-          let priceEls = Array.from(row.querySelectorAll('.price-column-item')).filter(el => /[\d]/.test(el.textContent));
-
-          // Also collect quantities and prices from sibling rows
-          let siblingRow = row.nextElementSibling;
-          while (siblingRow && !siblingRow.classList.contains('order-info')) {
-            const siblingQties = siblingRow.querySelectorAll('.quantity strong');
-            if (siblingQties.length > 0) {
-              qtyEls = qtyEls.concat(Array.from(siblingQties));
-            }
-            const siblingPrices = Array.from(siblingRow.querySelectorAll('.price-column-item')).filter(el => /[\d]/.test(el.textContent));
-            if (siblingPrices.length > 0) {
-              priceEls = priceEls.concat(siblingPrices);
-            }
-            siblingRow = siblingRow.nextElementSibling;
-          }
-
-          // Extract the aggregate order total from the main row for accurate revenue grouping
-          const totalOrderPriceEl = row.querySelector('.total-price');
+          // Extract aggregate order total from main row for accurate revenue grouping
+          const totalOrderPriceEl = row.querySelector('.total-price') || row.querySelector('td.price-column .total-price');
           const orderTotalText = totalOrderPriceEl ? totalOrderPriceEl.textContent.trim() : '£0.00';
 
           itemElements.forEach((itemEl, idx) => {
-
             const orderNumber = `${baseOrderNumber}---item${idx + 1}`;
+            
+            // Find container row for this specific item element
+            const itemRow = itemEl.closest('tr') || row;
             
             // Quantity for this specific item
             let quantity = 1;
-            if (qtyEls[idx]) {
-              quantity = parseInt(qtyEls[idx].textContent.trim(), 10) || 1;
+            const itemQtyEl = itemRow.querySelector('.quantity .available-quantity')?.previousElementSibling || 
+                              itemRow.querySelector('.quantity strong') || 
+                              itemEl.querySelector('.quantity strong');
+            if (itemQtyEl) {
+              quantity = parseInt(itemQtyEl.textContent.trim(), 10) || 1;
             }
 
             // Price for this specific item
-            let priceText = '£0.00';
-            if (priceEls[idx]) {
-              priceText = priceEls[idx].textContent.trim();
-            } else {
-              // Fallback to row total if item-level price is missing
-              const totalEl = row.querySelector('.total-price');
-              if (totalEl) priceText = totalEl.textContent.trim();
+            let priceText = orderTotalText;
+            const itemPriceEl = itemRow.querySelector('.price-column-item');
+            if (itemPriceEl && /[\d]/.test(itemPriceEl.textContent)) {
+              priceText = itemPriceEl.textContent.trim();
             }
 
             const currencySymbol = priceText.replace(/[\d.,\s-]/g, '').charAt(0) || '£';
@@ -402,8 +387,8 @@ document.addEventListener('DOMContentLoaded', () => {
             quantity = parseInt(qtyEl.textContent.trim(), 10) || 1;
           }
 
-          // Price
-          const priceEl = row.querySelector('.total-price') || row.querySelector('.price-column-item');
+          // Price (Targeting .total-price with safe .price-column-item fallback)
+          const priceEl = row.querySelector('.total-price') || row.querySelector('td.price-column .total-price') || row.querySelector('.price-column-item');
           const priceText = priceEl ? priceEl.textContent.trim() : '£0.00';
           const orderTotalText = priceText; // For single items, the total is just the price
 

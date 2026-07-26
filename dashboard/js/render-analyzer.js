@@ -1,5 +1,5 @@
 import * as dom from './dom.js';
-import { state } from './state.js';
+import { state } from './dashboardState.js';
 
 export function renderAnalyzerDashboard(analyzedProducts, ebaySiteDomain) {
   dom.analyzerGridContainer.innerHTML = '';
