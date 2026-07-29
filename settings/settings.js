@@ -4,8 +4,7 @@ const KEYS = [
   "enableSoldHistoryListing",
   "enableSoldHistoryCarousel",
   "enableSoldHistoryStore",
-  "enableActiveListingsIcon",
-  "enableAnalyticsSidebar"
+  "enableActiveListingsIcon"
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -47,6 +46,29 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  const clearStorageBtn = document.getElementById('clearStorageBtn');
+  if (clearStorageBtn) {
+    clearStorageBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to clear ALL extension storage?\n\nThis will permanently delete all saved sales orders, scanned history, and custom settings.")) {
+        const isExtension = typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local;
+        if (isExtension) {
+          chrome.storage.local.clear(() => {
+            if (chrome.storage.session) {
+              chrome.storage.session.clear(() => {});
+            }
+            localStorage.clear();
+            alert("All extension storage cleared successfully!");
+            window.location.reload();
+          });
+        } else {
+          localStorage.clear();
+          alert("All local storage cleared!");
+          window.location.reload();
+        }
+      }
+    });
+  }
 
   // --- Action Buttons Logic ---
   const btnScrapeSearch = document.getElementById('btnScrapeSearch');

@@ -4,6 +4,7 @@ window.getCurrentMarketplace = function() {
 
 window.getSoldHistoryUrl = function(itemId) {
   const domain = window.getCurrentMarketplace();
+  if (!itemId) return `https://${domain}`;
   return `https://${domain}/bin/purchaseHistory?item=${itemId}`;
 };
 

@@ -73,10 +73,10 @@ let lastItemId = null;
 function injectItemPage() {
   if (!location.href.includes("/itm/")) return;
 
-  const title = document.querySelector("h1");
+  const title = document.querySelector("[data-testid='x-item-title'], h1.x-item-title__mainTitle, .x-item-title, h1");
   if (!title) return;
 
-  const itemId = extractItemId(location.href);
+  const itemId = getItemId(location.href);
   if (!itemId) return;
 
   const existingContainer = document.querySelector(".ebay-smart-seller-toolkit");
